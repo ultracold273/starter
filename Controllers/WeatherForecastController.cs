@@ -35,7 +35,8 @@ public class WeatherForecastController : ControllerBase
         {
             requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.Token);
             var response = await client.SendAsync(requestMessage);
-            return this.Ok(response);
+            
+            return this.Ok(response.Content);
         }
     }
 }

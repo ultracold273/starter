@@ -29,4 +29,10 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    [HttpPost]
+    public async Task<ActionResult> Post()
+    {
+        return this.NoContent();
+    }
 }

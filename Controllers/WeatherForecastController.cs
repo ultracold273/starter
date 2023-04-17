@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace starter.Controllers;
 
@@ -30,9 +31,15 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
-    [HttpPost]
+    [HttpGet(Name = "Get Appliation Gateway")]
     public async Task<ActionResult> Post()
     {
-        return this.NoContent();
+        var subscriptionId = "17a663b5-f43a-4bb8-aea0-5a37a2f0cb81";
+        var resourceGroupName = "jump-rg-sg";
+        var applicationGatewayName = "app-gw-jump-rg-sg";
+        HttpClient client = new HttpClient();
+        var response = await client.GetAsync($"https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}?api-version=2022-09-01");
+
+        return this.Ok(response);
     }
 }

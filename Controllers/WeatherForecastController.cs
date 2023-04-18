@@ -27,7 +27,8 @@ public async Task<ActionResult> Post([FromBody]string? tokenFromUser)
         var credential = new Azure.Identity.DefaultAzureCredential();
         string token;
         if (tokenFromUser is null) {
-            token = await credential.GetTokenAsync(new Azure.Core.TokenRequestContext(new[] { "https://management.azure.com/.default" })).Token;
+            var tokenTask = await credential.GetTokenAsync(new Azure.Core.TokenRequestContext(new[] { "https://management.azure.com/.default" }));
+            token = tokenTask.Token;
         } else {
             token = tokenFromUser;
         }

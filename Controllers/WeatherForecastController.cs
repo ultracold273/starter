@@ -25,7 +25,7 @@ public class WeatherForecastController : ControllerBase
         HttpClient client = new HttpClient();
 
         var credential = new Azure.Identity.DefaultAzureCredential();
-        var token = await credential.GetTokenAsync(new Azure.Core.TokenRequestContext(new[] { "https://management.core.windows.net/user_impersonation" }));
+        var token = await credential.GetTokenAsync(new Azure.Core.TokenRequestContext(new[] { "https://management.azure.com/.default" }));
      
         var subscriptionId = "17a663b5-f43a-4bb8-aea0-5a37a2f0cb81";
         var resourceGroupName = "jump-rg-sg";
@@ -36,7 +36,7 @@ public class WeatherForecastController : ControllerBase
             requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.Token);
             var response = await client.SendAsync(requestMessage);
             
-            return this.Ok(response.Content);
+            return this.Ok(response);
         }
     }
 }

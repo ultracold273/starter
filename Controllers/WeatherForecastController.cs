@@ -4,14 +4,9 @@ using System.Net;
 namespace starter.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/test")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
     private readonly ILogger<WeatherForecastController> _logger;
 
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -20,6 +15,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost(Name = "GetAppliationGateway")]
+    [Route("apgw")]
     public async Task<ActionResult> Post([FromBody]string? tokenFromUser)
     {
         HttpClient client = new HttpClient();
@@ -42,7 +38,7 @@ public class WeatherForecastController : ControllerBase
             requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var response = await client.SendAsync(requestMessage);
             
-            return this.Ok(response);
+            return this.Ok(new {request = requestMessage, response = response});
         }
     }
 }

@@ -19,8 +19,8 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetAppliationGateway")]
-public async Task<ActionResult> Post([FromBody]string? tokenFromUser)
+    [HttpPost(Name = "GetAppliationGateway")]
+    public async Task<ActionResult> Post([FromBody]string? tokenFromUser)
     {
         HttpClient client = new HttpClient();
 

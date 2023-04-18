@@ -4,18 +4,17 @@ using System.Net;
 namespace starter.Controllers;
 
 [ApiController]
-[Route("api/test")]
-public class WeatherForecastController : ControllerBase
+[Route("[controller]")]
+public class TestController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<TestController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public TestController(ILogger<TestController> logger)
     {
         _logger = logger;
     }
 
     [HttpPost(Name = "GetAppliationGateway")]
-    [Route("apgw")]
     public async Task<ActionResult> Post([FromBody]string? tokenFromUser)
     {
         HttpClient client = new HttpClient();

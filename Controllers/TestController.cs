@@ -41,8 +41,9 @@ public class TestController : ControllerBase
         {
             requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var response = await client.SendAsync(requestMessage);
+            var content = await response.Content.ReadAsStringAsync();
             
-            return this.Ok(new {request = requestMessage, response = response});
+            return this.Ok(new {request = requestMessage, response = response, rawContent = content});
         }
     }
 }

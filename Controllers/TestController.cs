@@ -27,6 +27,11 @@ public class TestController : ControllerBase
         } else {
             token = tokenFromUser;
         }
+
+        client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("FxVersion", string.Empty));
+        client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("OSName", string.Empty));
+        client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("OSVersion", string.Empty));
+        client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("Microsoft.Azure.Management.ContainerInstance.ContainerInstanceManagementClient", string.Empty));
      
         var subscriptionId = "17a663b5-f43a-4bb8-aea0-5a37a2f0cb81";
         var resourceGroupName = "jump-rg-sg";
